@@ -2,7 +2,8 @@ var htmlEl = document.documentElement
 var textEl = document.querySelector('h1')
 var inputEl = document.querySelector('input')
 
-function luhn (a, b, c, d, e) {
+function luhn (a) {
+  var b, c, d, e
   for (d = +a[b = a.length - 1], e = 0; b--;) {
     c = +a[b]
     d += ++e % 2 ? 2 * c % 10 + (c > 4) : c
@@ -22,7 +23,7 @@ function render (status) {
 }
 
 inputEl.addEventListener('input', function () {
-  var val = inputEl.value.trim()
+  var val = inputEl.value.replace(/\D/g, '')
 
   if (val === '') {
     render(null)
@@ -30,3 +31,5 @@ inputEl.addEventListener('input', function () {
     render(luhn(val))
   }
 })
+
+render(null)
